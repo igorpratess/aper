@@ -1,9 +1,11 @@
 import React from 'react';
 import './App.css';
 
+import Login from "./assets/pages/Login";
+
 function App() {
   return (
-    <h1>HELLO WORLD!</h1>
+    <Login />
   );
 }
 

@@ -1,2 +1,0 @@
-# aper
-Trabalho de Graduação
