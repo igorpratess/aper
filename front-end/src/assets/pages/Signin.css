@@ -58,7 +58,7 @@ input.inputs-style {
     font-family: monospace;
     transform: skewX(10deg);
     position: relative;
-    top: -5vh;
+    margin-bottom: 10px;
 }
 
 .signin-container form div {
