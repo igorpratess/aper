@@ -15,10 +15,6 @@ function Login({ history }) {
         //     userpass
         // });
 
-        // console.log(teste);
-
-        // console.log(teste);
-
         // console.log(response);
 
         history.push('/main');
