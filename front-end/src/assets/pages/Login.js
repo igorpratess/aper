@@ -17,6 +17,8 @@ function Login({ history }) {
 
         // console.log(teste);
 
+        // console.log(teste);
+
         // console.log(response);
 
         history.push('/main');
