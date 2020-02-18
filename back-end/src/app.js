@@ -12,11 +12,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname + 'public')));
 
-app.get('/', function (req, res) {
+app.get('/', function(req, res) {
     res.status(conexao).send(bodyParser);
 });
 
-app.listen(3000, function () {
+app.listen(3000, function() {
     console.log('a')
 });
 

@@ -10,7 +10,6 @@ function Login({ history }) {
 
     async function handleSubmit(e) {
         e.preventDefault();
-
         // const response = await api.post('/cadastro', {
         //     username,
         //     userpass
