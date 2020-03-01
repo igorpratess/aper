@@ -8,12 +8,12 @@ var dbConfig = {
 };
 
 
-sql.connect(dbConfig, function (err) {
+sql.connect(dbConfig, function(err) {
     if (err) throw (err);
 
     var req = new sql.Request();
 
-    req.query('select * from Login', function (err, recordset) {
+    req.query('select * from Usuarios', function(err, recordset) {
         if (err) throw err;
         else
             console.log(recordset);

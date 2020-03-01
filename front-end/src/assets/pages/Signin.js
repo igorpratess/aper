@@ -5,17 +5,19 @@ const logo = require('../images/logo-tg.png');
 export default function Signin() {
     return (
         <div className="signin-container">
-            <div className="row"></div>
-            <form>
-                <img src={logo} alt="Logo" width="320" height="70" />
-                <div className="d-flex">
+            <div className="row-signin"></div>
+            <form action="/" method="POST">
+                <img src={logo} alt="Logo" width="100%" height="70" />
+                <div className="d-flex divs">
                     <input placeholder='Nome' className="inputs-style mr-1" />
                     <input placeholder='Usuário' className="inputs-style ml-1" />
                 </div>
 
-                <input placeholder='Email ou Telefone' className="inputs-style" />
+                <div className="divs">
+                    <input placeholder='Email ou Telefone' className="inputs-style" />
+                </div>
 
-                <div className="d-flex">
+                <div className="d-flex divs">
                     <select name="dia" id="">
                         <option value="0">1</option>
                         <option value="1">2</option>
@@ -165,9 +167,11 @@ export default function Signin() {
                     </select>
                 </div>
 
-                <input placeholder='Nova senha' className="inputs-style" />
+                <div className="divs">
+                    <input placeholder='Nova senha' className="inputs-style" />
+                </div>
 
-                <div>
+                <div className='divs'>
                     <input type="checkbox" id="termos" />
                     <label htmlFor="termos">Li e aceito os <a href="#">Termos de Uso</a> e a <a href="#">Política de Privacidade</a></label>
                 </div>

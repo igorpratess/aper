@@ -66,9 +66,11 @@
     top: -10vh;
 }
 
-.row {
+.row-login {
+    max-width: 600px;
+    min-width: 280px;
     width: 35%;
-    height: 70%;
+    height: 500px;
     background: white;
     border-radius: 3%;
 }
@@ -89,4 +91,22 @@ a {
 a:hover {
     color: #0d13ff;
     transition: all .5s ease-in-out;
+}
+
+@media (max-width: 900px) {
+    .div-forgot {
+        max-width: 270px;
+    }
+    .login-container form button {
+        max-width: 250px;
+    }
+    .login-container form input {
+        max-width: 250px;
+    }
+}
+
+@media (max-width: 420px) {
+    .row-login {
+        width: 90%;
+    }
 }

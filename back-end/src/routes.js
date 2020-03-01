@@ -1,11 +1,7 @@
 const express = require('express');
+const app = express();
+const authenticateRoute = require('../routes/authenticateRoute.js');
 
-const routes = express.Router();
+app.use('/signin', authenticateRoute);
 
-routes.get('/', (req, res) => {
-    return res.json({ message: `Hello ${req.query.name}` });
-});
-
-routes.post()
-
-module.exports = routes;
+module.exports = app;

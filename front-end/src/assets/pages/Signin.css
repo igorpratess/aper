@@ -75,9 +75,11 @@ input#termos {
     margin-right: 4px;
 }
 
-.row {
+.row-signin {
+    max-width: 600px;
+    min-width: 280px;
     width: 35%;
-    height: 80%;
+    height: 500px;
     background: white;
     border-radius: 3%;
 }
@@ -119,4 +121,19 @@ select {
     font-family: Poppins-Medium;
     transition: all .9s ease-in-out;
     background-color: white;
+}
+
+@media (max-width: 900px) {
+    .divs {
+        max-width: 270px;
+    }
+    .signin-container form button {
+        max-width: 250px;
+    }
+}
+
+@media (max-width: 420px) {
+    .row-signin {
+        width: 90%;
+    }
 }
