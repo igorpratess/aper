@@ -79,7 +79,7 @@ input#termos {
     max-width: 600px;
     min-width: 280px;
     width: 35%;
-    height: 500px;
+    height: 550px;
     background: white;
     border-radius: 3%;
 }
@@ -121,6 +121,34 @@ select {
     font-family: Poppins-Medium;
     transition: all .9s ease-in-out;
     background-color: white;
+}
+
+select:focus {
+    border-bottom: 1.4px solid #0044ff;
+}
+
+.msg-error {
+    border: 1px solid salmon;
+    color: salmon;
+    padding: 2px;
+    width: 100%;
+}
+
+.d-none {
+    display: none;
+}
+
+.small {
+    font-size: 11px;
+    color: salmon;
+}
+
+.errPass {
+    border-color: salmon!important;
+}
+
+.show {
+    display: flex;
 }
 
 @media (max-width: 900px) {

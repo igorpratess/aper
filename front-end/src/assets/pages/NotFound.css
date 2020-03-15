@@ -1,0 +1,17 @@
+.notFound-container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../images/bg-01.jpg');
+    background-size: cover;
+    filter: sepia(0.5);
+}
+
+.d-flex {
+    display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}

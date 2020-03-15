@@ -1,4 +1,3 @@
-const json = require('../config/config.json');
 'use strict';
 module.exports = (sequelize, DataTypes) => {
     const Usuario = sequelize.define('Usuario', {
