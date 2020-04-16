@@ -5,14 +5,16 @@ import Login from "../pages/Login";
 import Main from "../pages/Main";
 import Signin from "../pages/Signin";
 import NotFound from '../pages/NotFound';
+import { connect } from 'react-redux';
 
 class Routes extends Component {
 
     render() {
+        console.log(this.props.isAuthenticated);
         return <BrowserRouter>
             <Switch>
                 <Route exact path="/" component={Login} />
-                <PrivateRoutes exact path="/main" component={Main} isAuthenticated={false} />
+                <PrivateRoutes exact path="/main" component={Main} isAuthenticated={this.props.isAuthenticated} />
                 <Route path="/signin" component={Signin} />
                 <Route path="*" component={NotFound} />
             </Switch>
@@ -21,4 +23,9 @@ class Routes extends Component {
 
 }
 
-export default Routes;
+const mapStateToProps = state => ({ 
+    user: state.user.user,
+    isAuthenticated: state.user.isAuthenticated
+});
+
+export default connect(mapStateToProps)(Routes);

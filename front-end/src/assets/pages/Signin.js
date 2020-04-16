@@ -6,6 +6,10 @@ const logo = require('../images/logo-tg.png');
 
 class Signin extends React.Component {
 
+    constructor(props) {
+        super(props);
+    }
+
     state = {
         nome: "",
         nickname: "",
@@ -25,10 +29,10 @@ class Signin extends React.Component {
         e.preventDefault();
         const { nome, nickname, contato, dia, mes, ano, senha } = this.state;
         if (!nome || !nickname || !contato || !dia || !mes || !ano || !senha) {
-            this.setState({ error: "Preencha todos os dados para se cadastrar" });
+            this.setState({ error: "Preencha todos os campos para se cadastrar" });
         } else {
             try {
-                await api.post("/users", { nome, nickname, contato, dia, mes, ano, senha });
+                await api.post("/signin", { nome, nickname, contato, dia, mes, ano, senha });
                 this.props.history.push("/");
             } catch (err) {
                 console.log(err);

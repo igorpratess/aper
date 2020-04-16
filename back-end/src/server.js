@@ -1,6 +1,5 @@
 const express = require('express');
 const routes = require('./routes');
-
 const server = express(true);
 
 server.use(express.json());

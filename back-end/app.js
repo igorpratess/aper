@@ -7,7 +7,8 @@ const express = require('express');
 var app = express();
 var debug = require('debug')('teste-tg1:server');
 var http = require('http');
-const routes = require('./src/routes.js');
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
 
 /**
  * Get port from environment and store in Express.
@@ -16,6 +17,8 @@ const routes = require('./src/routes.js');
 var port = normalizePort(process.env.PORT || '8000');
 app.set('port', port);
 app.use(express.json());
+app.use(cors());
+app.use(cookieParser());
 /**
  * Create HTTP server.
  */
@@ -36,20 +39,20 @@ server.on('listening', onListening);
  */
 
 function normalizePort(val) {
-  var port = parseInt(val, 10);
-  
-  if (isNaN(port)) {
-    // named pipe
-    return val;
-  }
+    var port = parseInt(val, 10);
 
-  if (port >= 0) {
-    console.log(`App funcionando na porta: ${port}`)
-    // port number
-    return port;
-  }
+    if (isNaN(port)) {
+        // named pipe
+        return val;
+    }
 
-  return false;
+    if (port >= 0) {
+        console.log(`App funcionando na porta: ${port}`)
+            // port number
+        return port;
+    }
+
+    return false;
 }
 
 /**
@@ -57,27 +60,27 @@ function normalizePort(val) {
  */
 
 function onError(error) {
-  if (error.syscall !== 'listen') {
-    throw error;
-  }
+    if (error.syscall !== 'listen') {
+        throw error;
+    }
 
-  var bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
+    var bind = typeof port === 'string' ?
+        'Pipe ' + port :
+        'Port ' + port;
 
-  // handle specific listen errors with friendly messages
-  switch (error.code) {
-    case 'EACCES':
-      console.error(bind + ' requires elevated privileges');
-      process.exit(1);
-      break;
-    case 'EADDRINUSE':
-      console.error(bind + ' is already in use');
-      process.exit(1);
-      break;
-    default:
-      throw error;
-  }
+    // handle specific listen errors with friendly messages
+    switch (error.code) {
+        case 'EACCES':
+            console.error(bind + ' requires elevated privileges');
+            process.exit(1);
+            break;
+        case 'EADDRINUSE':
+            console.error(bind + ' is already in use');
+            process.exit(1);
+            break;
+        default:
+            throw error;
+    }
 }
 
 /**
@@ -85,11 +88,12 @@ function onError(error) {
  */
 
 function onListening() {
-  var addr = server.address();
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
-  debug('Listening on ' + bind);
+    var addr = server.address();
+    var bind = typeof addr === 'string' ?
+        'pipe ' + addr :
+        'port ' + addr.port;
+    debug('Listening on ' + bind);
 }
 
+const routes = require('./src/routes.js');
 app.use(routes);

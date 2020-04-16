@@ -8,6 +8,7 @@ const sequelize = new Sequelize(dbDev.database, dbDev.username, dbDev.password, 
     dialect: dbDev.dialect
 });
 const User = require('../models/usuario.js')(sequelize, DataTypes);
+const jwt = require('jsonwebtoken');
 
 async function autentica(req, res) {
     let { contato, password } = req.body;
@@ -20,8 +21,11 @@ async function autentica(req, res) {
     if (!comparePassw) {
         res.status(404).send('Email ou senha não encontrado');
     }
-
-    res.status(200).send(comparePassw);
+    const token = jwt.sign({ contato }, 'shhhhh', { expiresIn: '1h' });
+    user.dataValues.token = token;
+    res.status(200).send(user);
+    // res.cookie('token', token, { httpOnly: true })
+    //     .sendStatus(200);
 }
 
 module.exports = { autentica };
