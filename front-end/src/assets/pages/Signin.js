@@ -31,13 +31,20 @@ class Signin extends React.Component {
         if (!nome || !nickname || !contato || !dia || !mes || !ano || !senha) {
             this.setState({ error: "Preencha todos os campos para se cadastrar" });
         } else {
-            try {
-                await api.post("/signin", { nome, nickname, contato, dia, mes, ano, senha });
-                this.props.history.push("/");
-            } catch (err) {
-                console.log(err);
-                this.setState({ error: "Ocorreu um erro ao registrar sua conta." });
-            }
+            await api.post("/user", { nome, nickname, contato, dia, mes, ano, senha })
+                .then(res => {
+                    if (res.status === 200) {
+                        this.setState({ error: res.data });
+                    }
+                    if (res.status === 201) {
+                        this.props.history.push("/");
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                    this.setState({ error: "Ocorreu um erro ao registrar sua conta." });
+                })
+
         }
     }
 
