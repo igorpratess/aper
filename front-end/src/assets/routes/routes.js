@@ -3,19 +3,18 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import PrivateRoutes from './privateRoutes';
 import Login from "../pages/Login";
 import Main from "../pages/Main";
-import Signin from "../pages/Signin";
+import Signup from "../pages/Signup";
 import NotFound from '../pages/NotFound';
 import { connect } from 'react-redux';
 
 class Routes extends Component {
 
     render() {
-        console.log(this.props.isAuthenticated);
         return <BrowserRouter>
             <Switch>
                 <Route exact path="/" component={Login} />
                 <PrivateRoutes exact path="/main" component={Main} isAuthenticated={this.props.isAuthenticated} />
-                <Route path="/signin" component={Signin} />
+                <Route path="/signup" component={Signup} />
                 <Route path="*" component={NotFound} />
             </Switch>
         </BrowserRouter>

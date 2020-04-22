@@ -9,28 +9,48 @@ class Login extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            contato: "",
-            password: ""
-        }
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    state = {
+        contato: "",
+        password: "",
+        error: "",
+        checkbox: true
     }
 
     async handleSubmit(e) {
         e.preventDefault();
 
-        const response = await api.post('/signin', {
+        const response = await api.post('/signup', {
             contato: this.state.contato,
             password: this.state.password
         })
             .then(res => {
                 this.props.authenticated();
                 localStorage.setItem('token', res.data.token);
+                this.setLocalStorage();
                 this.props.history.push('/main');
             })
             .catch(error => {
-                console.log(error)
+                this.setState({ error: "Usuário ou senha inválidos!" });
             })
+    }
+
+    toggleChange = () => {
+        this.setState({
+            checkbox: !this.state.checkbox,
+        });
+    }
+
+    setLocalStorage() {
+        const user = document.getElementById('user');
+        const passw = document.getElementById('passw');
+
+        if(this.state.checkbox === true) {
+            localStorage.setItem('user', user.value);
+            localStorage.setItem('passw', passw.value);
+        }
     }
 
     render() {
@@ -39,13 +59,18 @@ class Login extends React.Component {
                 <div className="row-login"></div>
                 <form action="/main" method="GET" onSubmit={this.handleSubmit}>
                     <img className='logo' src={logo} alt="Logo" width="100%" height="70" />
-                    <input id="user" placeholder='Email ou Usuário' value={this.state.contato} onChange={e => this.setState({ contato: e.target.value })} />
-                    <input id="passw" placeholder='Senha' type="password" value={this.state.password} onChange={e => this.setState({ password: e.target.value })} />
+                    {this.state.error && <div className='msg-error'><h5>{this.state.error}</h5></div>}
+                    <input id="user" placeholder='Email ou Usuário' value={localStorage.getItem('user')} onChange={e => this.setState({ contato: e.target.value })} />
+                    <input id="passw" placeholder='Senha' type="password" value={localStorage.getItem('passw')} onChange={e => this.setState({ password: e.target.value })} />
+                    <div className="divRemember">
+                        <label className="label-remember" htmlFor="remember">Lembrar-me</label>
+                        <input id="remember" checked={this.state.checkbox} type="checkbox" className="inputRemember" onChange={this.toggleChange} />
+                    </div>
                     <div className="div-forgot">
                         <a className="forgot" href="#">Esqueceu sua senha?</a>
                     </div>
                     <button type="submit">Entrar</button>
-                    <span>Ainda não é cadastrado? <a className="cadastrar" href="/signin">Cadastrar-se</a></span>
+                    <span>Ainda não é cadastrado? <a className="cadastrar" href="/signup">Cadastrar-se</a></span>
                 </form>
             </div>
         );
@@ -58,8 +83,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    authenticated: (/*accessToken, refreshToken*/) => dispatch(
-        AuthenticationActions.authenticated(/*accessToken, refreshToken*/)
+    authenticated: (s) => dispatch(
+        AuthenticationActions.authenticated(s)
     ),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

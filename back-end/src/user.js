@@ -13,7 +13,6 @@ User.prototype = {
         }
         // prepare the sql query
         let sql = `SELECT * FROM Usuario WHERE ${field} = ?`;
-        console.log('sql: ', sql)
 
         conexao.query(sql, user, function(err, result) {
             if (err) throw err

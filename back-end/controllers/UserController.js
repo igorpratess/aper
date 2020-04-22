@@ -2,7 +2,6 @@ const Sequelize = require('sequelize');
 const DataTypes = Sequelize.DataTypes;
 const data = require('../config/config.json');
 const dbDev = data.development;
-const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const sequelize = new Sequelize(dbDev.database, dbDev.username, dbDev.password, {
     host: dbDev.host,

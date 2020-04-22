@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import './Signin.css';
+import './Signup.css';
 import api from '../services/api';
 const logo = require('../images/logo-tg.png');
 
-class Signin extends React.Component {
+class Signup extends React.Component {
 
     constructor(props) {
         super(props);
@@ -41,7 +41,6 @@ class Signin extends React.Component {
                     }
                 })
                 .catch(err => {
-                    console.log(err);
                     this.setState({ error: "Ocorreu um erro ao registrar sua conta." });
                 })
 
@@ -63,22 +62,22 @@ class Signin extends React.Component {
 
     render() {
         return (
-            <div className="signin-container" >
-                <div className="row-signin"></div>
+            <div className="signup-container" >
+                <div className="row-signup"></div>
                 <form onSubmit={this.handleChange} action="/" method="POST">
                     <img src={logo} alt="Logo" width="100%" height="70" />
                     {this.state.error && <div className='msg-error'><h5>{this.state.error}</h5></div>}
                     <div className="d-flex divs">
-                        <input onChange={e => { console.log('Estou no nome'); this.setState({ nome: e.target.value }) }} placeholder='Nome' className="inputs-style mr-1" />
-                        <input onChange={e => { console.log('Estou no nick'); this.setState({ nickname: e.target.value }) }} placeholder='Usuário' className="inputs-style ml-1" />
+                        <input onChange={e => {this.setState({ nome: e.target.value }) }} placeholder='Nome' className="inputs-style mr-1" />
+                        <input onChange={e => {this.setState({ nickname: e.target.value }) }} placeholder='Usuário' className="inputs-style ml-1" />
                     </div>
 
                     <div className="divs">
-                        <input onChange={e => { console.log('Estou no contato'); this.setState({ contato: e.target.value }) }} placeholder='Email ou Telefone' className="inputs-style" />
+                        <input onChange={e => {this.setState({ contato: e.target.value }) }} placeholder='Email ou Telefone' className="inputs-style" />
                     </div>
 
                     <div className="d-flex divs">
-                        <select onChange={e => { console.log('Estou no dia'); this.setState({ dia: e.target.value }) }} name="dia" id="dia">
+                        <select onChange={e => {this.setState({ dia: e.target.value }) }} name="dia" id="dia">
                             <option value="0">1</option>
                             <option value="1">2</option>
                             <option value="2">3</option>
@@ -111,7 +110,7 @@ class Signin extends React.Component {
                             <option value="29">30</option>
                             <option value="30">31</option>
                         </select>
-                        <select onChange={e => { console.log('Estou no mes'); this.setState({ mes: e.target.value }) }} name="mes" id="mes">
+                        <select onChange={e => {this.setState({ mes: e.target.value }) }} name="mes" id="mes">
                             <option value="0">Janeiro</option>
                             <option value="1">Fevereiro</option>
                             <option value="2">Março</option>
@@ -125,7 +124,7 @@ class Signin extends React.Component {
                             <option value="10">Novembro</option>
                             <option value="11">Dezembro</option>
                         </select>
-                        <select onChange={e => { console.log('Estou no ano'); this.setState({ ano: e.target.value }) }} name="ano" id="ano">
+                        <select onChange={e => {this.setState({ ano: e.target.value }) }} name="ano" id="ano">
                             <option value="2002">2002</option>
                             <option value="2001">2001</option>
                             <option value="2000">2000</option>
@@ -228,8 +227,8 @@ class Signin extends React.Component {
                     </div>
 
                     <div className="divs">
-                        <input id='newPass' className={this.state.className + ' inputs-style'} onChange={e => { console.log('Estou no senha'); this.setState({ senha: e.target.value }) }} placeholder='Nova senha' type="password" />
-                        <input id='confPass' className={this.state.className + ' inputs-style'} onChange={e => { console.log('Estou no senha'); this.setState({ senha: e.target.value }) }} placeholder='Confirmar senha' type="password" />
+                        <input id='newPass' className={this.state.className + ' inputs-style'} onChange={e => {this.setState({ senha: e.target.value }) }} placeholder='Nova senha' type="password" />
+                        <input id='confPass' className={this.state.className + ' inputs-style'} onChange={e => {this.setState({ senha: e.target.value }) }} placeholder='Confirmar senha' type="password" />
                         <small className={this.state.show + ' small'}>As senhas não coincidem</small>
                     </div>
 
@@ -246,4 +245,4 @@ class Signin extends React.Component {
 
 }
 
-export default withRouter(Signin);
+export default withRouter(Signup);

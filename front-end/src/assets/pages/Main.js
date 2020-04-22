@@ -4,10 +4,10 @@ import axios from "axios";
 
 class Main extends React.Component {
     componentDidMount() {
-        this.teste2()
+        this.beforeLogin()
     }
 
-    async teste2() {
+    async beforeLogin() {
         const axiosInstance = axios.create({
             baseURL: 'http://127.0.0.1:8000/',        
             headers: {
@@ -17,10 +17,8 @@ class Main extends React.Component {
 
         const response = await axiosInstance({ method: 'GET', url: '/user'})
             .then(res => {
-                console.log(res)
             })
             .catch(error => {
-                console.log(error)
             })
     }
 

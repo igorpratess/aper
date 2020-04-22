@@ -15,7 +15,5 @@ sql.connect(dbConfig, function(err) {
 
     req.query('select * from Usuarios', function(err, recordset) {
         if (err) throw err;
-        else
-            console.log(recordset);
     });
 });

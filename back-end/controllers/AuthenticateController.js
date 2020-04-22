@@ -24,8 +24,6 @@ async function autentica(req, res) {
     const token = jwt.sign({ contato }, 'shhhhh', { expiresIn: '1h' });
     user.dataValues.token = token;
     res.status(200).send(user);
-    // res.cookie('token', token, { httpOnly: true })
-    //     .sendStatus(200);
 }
 
 module.exports = { autentica };
