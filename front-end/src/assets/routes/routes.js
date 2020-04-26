@@ -6,6 +6,8 @@ import Main from "../pages/Main";
 import Signup from "../pages/Signup";
 import NotFound from '../pages/NotFound';
 import { connect } from 'react-redux';
+import Listing from '../pages/Listing';
+import RegisterItem from '../pages/RegisterItem';
 
 class Routes extends Component {
 
@@ -15,6 +17,8 @@ class Routes extends Component {
                 <Route exact path="/" component={Login} />
                 <PrivateRoutes exact path="/main" component={Main} isAuthenticated={this.props.isAuthenticated} />
                 <Route path="/signup" component={Signup} />
+                <Route path="/listing" component={Listing} />
+                <Route path="/register-item" component={RegisterItem} />
                 <Route path="*" component={NotFound} />
             </Switch>
         </BrowserRouter>
@@ -22,7 +26,7 @@ class Routes extends Component {
 
 }
 
-const mapStateToProps = state => ({ 
+const mapStateToProps = state => ({
     user: state.user.user,
     isAuthenticated: state.user.isAuthenticated
 });
