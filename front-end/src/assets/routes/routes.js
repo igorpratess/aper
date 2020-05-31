@@ -17,7 +17,9 @@ class Routes extends Component {
                 <Route exact path="/" component={Login} />
                 <PrivateRoutes exact path="/main" component={Main} isAuthenticated={this.props.isAuthenticated} />
                 <Route path="/signup" component={Signup} />
+                {/* <PrivateRoutes exact path="/listing" component={Listing} isAuthenticated={this.props.isAuthenticated} /> */}
                 <Route path="/listing" component={Listing} />
+                {/* <PrivateRoutes exact path="/register-item" component={RegisterItem} isAuthenticated={this.props.isAuthenticated} /> */}
                 <Route path="/register-item" component={RegisterItem} />
                 <Route path="*" component={NotFound} />
             </Switch>

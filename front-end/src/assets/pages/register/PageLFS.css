@@ -1,0 +1,80 @@
+.justify-content-between {
+    justify-content: space-between;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+section {
+    width: 380px;
+}
+
+.row-found input:not(#img) {
+    border: none;
+    padding: 0 5px;
+    border-bottom: 1.4px solid #8e9ba1;
+    -webkit-text-fill-color: #8e9ba1;
+    font-family: Poppins-Medium;
+    transition: all .9s ease-in-out;
+}
+
+.row-found input:focus {
+    border-bottom: 1.4px solid #0044ff;
+    transition: border-width all .9s ease-in-out;
+}
+
+.my-1 {
+    margin: 8px 0px 8px 0px;
+}
+
+textarea {
+    border-bottom: 1.4px solid #8e9ba1;
+    -webkit-text-fill-color: #8e9ba1;
+    border-radius: 3px;
+    padding: 2px;
+    font-family: Poppins-Medium;
+}
+
+.btn {
+    padding: .375rem .75rem;
+    width: 30%;
+    margin: 0px 10px 0px 10px;
+    cursor: pointer;
+    border-radius: .25rem;
+    border: 1px solid transparent;
+    font-family: Poppins-Medium;
+}
+
+.btn:hover {
+    opacity: .9;
+}
+
+.btn-red {
+    background-color: red;
+    color: white;
+    border-color: red;
+}
+
+.btn-green {
+    background-color: green;
+    color: white;
+    border-color: green;
+}
+
+label span {
+    color: red;
+}
+
+.mt-1 {
+    margin-top: .8rem;
+}
+
+input[type='radio'] {
+    cursor: pointer;
+}
+
+.textLAF {
+    cursor: pointer;
+    margin-left: 3px;
+}

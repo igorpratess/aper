@@ -98,6 +98,9 @@ a:hover {
     color: salmon;
     padding: 2px;
     width: 100%;
+}
+
+.msg-error-size {
     max-width: 260px;
 }
 

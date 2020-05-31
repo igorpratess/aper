@@ -66,7 +66,7 @@ class Signup extends React.Component {
                 <div className="row-signup"></div>
                 <form onSubmit={this.handleChange} action="/" method="POST">
                     <img src={logo} alt="Logo" width="100%" height="70" />
-                    {this.state.error && <div className='msg-error'><h5>{this.state.error}</h5></div>}
+                    {this.state.error && <div className='msg-error msg-error-size'><h5>{this.state.error}</h5></div>}
                     <div className="d-flex divs">
                         <input onChange={e => {this.setState({ nome: e.target.value }) }} placeholder='Nome' className="inputs-style mr-1" />
                         <input onChange={e => {this.setState({ nickname: e.target.value }) }} placeholder='Usuário' className="inputs-style ml-1" />
