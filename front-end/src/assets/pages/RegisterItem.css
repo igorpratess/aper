@@ -11,7 +11,7 @@
 .row-register-item {
     max-width: 600px;
     min-width: 280px;
-    width: 430px;
+    width: 450px;
     height: 570px;
     background: white;
     border-radius: 3%;
@@ -20,7 +20,6 @@
 
 .register-container form {
     width: 100%;
-    max-width: 380px;
 }
 
 .mt-1 {

@@ -6,10 +6,6 @@
     align-items: center;
 }
 
-section {
-    width: 380px;
-}
-
 .row-found input:not(#img) {
     border: none;
     padding: 0 5px;
@@ -38,12 +34,15 @@ textarea {
 
 .btn {
     padding: .375rem .75rem;
-    width: 30%;
     margin: 0px 10px 0px 10px;
     cursor: pointer;
     border-radius: .25rem;
     border: 1px solid transparent;
     font-family: Poppins-Medium;
+}
+
+.col-3 {
+    width: 30%;
 }
 
 .btn:hover {

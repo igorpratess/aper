@@ -30,11 +30,11 @@ class PageLFS extends React.Component {
 
     handleChange = async e => {
         e.preventDefault();
-        const { location, typeItem, name, date, description, images } = this.state;
-        if (!location || !typeItem || !name || !date) {
+        const { location, typeItem, name, date, description, itemType, images } = this.state;
+        if (!location || !typeItem || !name || !date || !itemType) {
             this.setState({ error: "Campos obrigatórios não preenchidos" });
         } else {
-            await api.post("/listing", { location, typeItem, name, date, description, images })
+            await api.post("/listing", { location, typeItem, name, date, description, itemType, images })
                 .then(res => {
                     this.props.history.push("/listing");
                 })
@@ -54,15 +54,15 @@ class PageLFS extends React.Component {
 
                     <div className="d-flex justify-center align-items-center mt-1">
                         <div className="d-flex justify-center align-items-center">
-                            <input name="check" type="radio" id="achado" value="achado" defaultChecked onChange={e => this.setState({ item: e.target.value })} />
+                            <input name="check" type="radio" id="achado" value="achado" defaultChecked onChange={e => this.setState({ itemType: e.target.value })} />
                             <label htmlFor="achado" className="textLAF">Achado</label>
                         </div>
                         <div className="d-flex justify-center align-items-center">
-                            <input name="check" type="radio" id="perdido" value="perdido" onChange={e => this.setState({ item: e.target.value })} />
+                            <input name="check" type="radio" id="perdido" value="perdido" onChange={e => this.setState({ itemType: e.target.value })} />
                             <label htmlFor="perdido" className="textLAF">Perdido</label>
                         </div>
                         <div className="d-flex justify-center align-items-center">
-                            <input name="check" type="radio" id="roubado" value="roubado" onChange={e => this.setState({ item: e.target.value })} />
+                            <input name="check" type="radio" id="roubado" value="roubado" onChange={e => this.setState({ itemType: e.target.value })} />
                             <label htmlFor="roubado" className="textLAF">Roubado</label>
                         </div>
                     </div>
@@ -78,7 +78,7 @@ class PageLFS extends React.Component {
                     </div>
 
                     <div className="d-flex justify-content-between align-items-center my-1">
-                        <label htmlFor="location">Nome do(a): <span>*</span></label>
+                        <label htmlFor="location">Nome do item: <span>*</span></label>
                         <input type="text" id="name" onChange={e => { this.setState({ name: e.target.value }) }} />
                     </div>
 
@@ -98,8 +98,8 @@ class PageLFS extends React.Component {
                     </div>
 
                     <div className="d-flex justify-center mt-1">
-                        <button className="btn btn-red">Cancelar</button>
-                        <button className="btn btn-green" type="submit">Enviar</button>
+                        <button className="btn btn-red col-3">Cancelar</button>
+                        <button className="btn btn-green col-3" type="submit">Enviar</button>
                     </div>
                 </form>
             </section>

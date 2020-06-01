@@ -6,17 +6,18 @@ const sequelize = new Sequelize(dbDev.database, dbDev.username, dbDev.password, 
     host: dbDev.host,
     dialect: dbDev.dialect
 });
-const ItemsFound = require('../models/itemsfound')(sequelize, DataTypes);
+const Items = require('../models/items')(sequelize, DataTypes);
 
 async function createItemFound(req, res) {
-    let { location, typeItem, name, date, description, images } = req.body;
+    let { location, typeItem, name, date, description, itemType, images } = req.body;
 
-    await ItemsFound.create({
+    await Items.create({
         location: location,
         typeItem: typeItem,
         name: name,
         date: date,
         description: description,
+        itemType: itemType,
         images: images
     });
 
@@ -24,7 +25,7 @@ async function createItemFound(req, res) {
 }
 
 async function getItems(req, res) {
-    let items = await ItemsFound.findAll();
+    let items = await Items.findAll();
     res.status(200).send(items);
 }
 
