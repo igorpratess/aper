@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import "./Listing.css";
-import api from '../services/api';
+import "../../pages/Listing";
+import api from '../../services/api';
 
-class Listing extends React.Component {
+class ListLost extends React.Component {
 
     constructor(props) {
         super(props);
@@ -78,4 +78,4 @@ class Listing extends React.Component {
         );
     }
 }
-export default Listing;
+export default ListLost;

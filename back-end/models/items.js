@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-    const ItemsFound = sequelize.define('ItemsFound', {
+    const Items = sequelize.define('Items', {
         location: DataTypes.STRING,
         typeItem: DataTypes.STRING,
         name: DataTypes.STRING,
@@ -9,8 +9,9 @@ module.exports = (sequelize, DataTypes) => {
         itemType: DataTypes.STRING,
         images: DataTypes.STRING
     }, {});
-    ItemsFound.associate = function(models) {
-        // associations can be defined here
-    };
-    return ItemsFound;
+    Items.associate = (models) => {
+        Items.belongsTo(models.Usuarios);
+    }
+
+    return Items;
 };

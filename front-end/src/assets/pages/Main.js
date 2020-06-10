@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import "./Main.css";
 import axios from "axios";
 import { withRouter } from 'react-router-dom';
+import Accordion from '../component/Accordion';
 
 class Main extends React.Component {
     componentDidMount() {
@@ -23,30 +24,39 @@ class Main extends React.Component {
             })
     }
 
-    registerItem() {
-        this.props.history.push("/register-item");
-    }
-
     listing() {
         this.props.history.push("/listing");
     }
 
+    cadItem() {
+        return [
+            <a href="/register-found" className="tab-content">Achado</a>,
+            <a href="/register-lost" className="tab-content">Perdido</a>,
+            <a href="/register-stolen" className="tab-content">Roubado</a>
+        ];
+    }
+
+    listItem() {
+        return [
+            <a href="/list-found" className="tab-content">Achados</a>,
+            <a href="/list-lost" className="tab-content">Perdidos</a>,
+            <a href="/list-stolen" className="tab-content">Roubados</a>
+        ]
+    }    
+
     render() {
         return (
             <div className="main-container" >
-                <div className="d-flex justify-center">
+                <div className="d-flex justify-center div-position">
                     <h1> O que quer fazer? </h1>
                 </div>
-                <div className="d-flex justify-center" >
-                    <div className="card" onClick={this.registerItem.bind(this)}>
-                        <h4>Cadastrar um item</h4>
-                    </div>
-                    <div className="card" onClick={this.listing.bind(this)}>
-                        <h4>Ir para listagem de itens</h4>
-                    </div>
+                <div className="d-flex justify-center align-items-center" >
+                    <Accordion title="Cadastrar item" id="cadItem" content={this.cadItem()}></Accordion>
+                    <Accordion title="Ir para listagem de items" id="listItem" content={this.listItem()}></Accordion>
                 </div>
             </div>
         );
     }
 }
+
 export default withRouter(Main);

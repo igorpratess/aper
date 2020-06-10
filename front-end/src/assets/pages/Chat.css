@@ -1,0 +1,39 @@
+.chat-container {
+    height: 100%;
+    padding-top: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-image: url('../images/bg-01.jpg');
+    background-size: cover;
+    filter: sepia(0.5);
+}
+
+.messages {
+    width: 100%;
+    padding: 4px;
+    height: calc(100vh - 220px);
+    background: white;
+    max-width: 70%;
+    min-width: 285px;
+    overflow: auto;
+}
+
+.userName,
+.typeMsg {
+    max-width: 70%;
+    min-width: 285px;
+    width: 100%;
+    background: white;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, .16), 0 1px 2px rgba(0, 0, 0, .23);
+    border-radius: 3px;
+    padding: 2px 0px 2px 8px;
+}
+
+.btnSend {
+    margin-top: 10px;
+    width: 100%;
+    background: black;
+    max-width: 70%;
+    color: white;
+}

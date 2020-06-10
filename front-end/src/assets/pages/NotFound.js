@@ -5,7 +5,7 @@ export default function NotFound() {
     return (
         <div className="notFound-container d-flex flex-column" >
             <h1> Página não encontrada</h1>
-            <a href="/"><h2>Início</h2></a>
+            <a href="/main"><h2>Início</h2></a>
         </div>
     );
 }

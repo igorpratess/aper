@@ -6,6 +6,9 @@ SELECT * FROM Items
 
 SELECT * FROM Usuarios
 
+SELECT * FROM Messages
+	
+
 
 
 

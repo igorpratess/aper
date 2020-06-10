@@ -47,7 +47,7 @@ class Login extends React.Component {
         const user = document.getElementById('user');
         const passw = document.getElementById('passw');
 
-        if(this.state.checkbox === true) {
+        if (this.state.checkbox === true) {
             localStorage.setItem('user', user.value);
             localStorage.setItem('passw', passw.value);
         }
@@ -62,14 +62,14 @@ class Login extends React.Component {
                     {this.state.error && <div className='msg-error msg-error-size'><h5>{this.state.error}</h5></div>}
                     <input id="user" placeholder='Email ou Usuário' onChange={e => this.setState({ contato: e.target.value })} />
                     <input id="passw" placeholder='Senha' type="password" onChange={e => this.setState({ password: e.target.value })} />
-                    <div className="divRemember">
+                    {/* <div className="divRemember">
                         <label className="label-remember" htmlFor="remember">Lembrar-me</label>
                         <input id="remember" checked={this.state.checkbox} type="checkbox" className="inputRemember" onChange={this.toggleChange} />
-                    </div>
-                    <div className="div-forgot">
+                    </div> */}
+                    {/* <div className="div-forgot">
                         <a className="forgot" href="#">Esqueceu sua senha?</a>
-                    </div>
-                    <button type="submit">Entrar</button>
+                    </div> */}
+                    <button style={{ marginTop: '30px' }} type="submit">Entrar</button>
                     <span>Ainda não é cadastrado? <a className="cadastrar" href="/signup">Cadastrar-se</a></span>
                 </form>
             </div>

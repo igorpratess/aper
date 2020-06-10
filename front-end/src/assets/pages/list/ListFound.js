@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import "./Listing.css";
-import api from '../services/api';
+import "../../pages/Listing";
+import api from '../../services/api';
 
-class Listing extends React.Component {
+class ListFound extends React.Component {
 
     constructor(props) {
         super(props);
@@ -52,6 +52,9 @@ class Listing extends React.Component {
                     <span>Data que foi {list[i].itemType}: {date}</span>
                     {description}
                     <div className="d-flex">
+                        <img src={list[i].images} alt="Imagem do item" width="100" height="100"/>
+                    </div>
+                    <div className="d-flex">
                         <div className="col-6 d-flex justify-center"></div>
                         <div className="col-6 d-flex justify-center">
                             <button className="btn btn-outline-primary font-weight-bold col-4">É meu <div className="icon-like"></div></button>
@@ -78,4 +81,4 @@ class Listing extends React.Component {
         );
     }
 }
-export default Listing;
+export default ListFound;

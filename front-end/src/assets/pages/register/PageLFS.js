@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from "axios";
 import "./PageLFS.css";
 import api from '../../services/api';
 import { withRouter } from 'react-router-dom';
@@ -7,6 +8,8 @@ class PageLFS extends React.Component {
 
     constructor(props) {
         super(props);
+        this.teste = this.teste.bind(this);
+        this.getFilesFromInputFiles = this.getFilesFromInputFiles.bind(this);
     }
 
     state = {
@@ -21,28 +24,48 @@ class PageLFS extends React.Component {
     };
 
     getFilesFromInputFiles(ev) {
-        let filenames = Array.from(ev.target.files).map(function (f) {
-            return f;
-        });
+        let arrayLinks = [];
 
-        // this.setState({ images: filenames})
+        let filenames = Array.from(ev.target.files).map(async function (f) {
+            let fd = new FormData();
+            fd.append('image', f);
+
+            await axios.post(
+                "https://api.imgur.com/3/image",
+                fd,
+                {
+                    headers: {
+                        'Authorization': 'Client-ID d97ff38029b8d95',
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }
+            ).then(res => {
+                arrayLinks.push(res.data.data.link);
+            }).catch(err => {
+                console.log(err);
+            })
+        });
+        this.teste(arrayLinks);
+    }
+
+    teste(link) {
+        this.setState({ images: link });
     }
 
     handleChange = async e => {
         e.preventDefault();
-        const { location, typeItem, name, date, description, itemType, images } = this.state;
+        let { location, typeItem, name, date, description, itemType, images } = this.state;
+
         if (!location || !typeItem || !name || !date || !itemType) {
             this.setState({ error: "Campos obrigatórios não preenchidos" });
         } else {
+            images = JSON.stringify(images);
             await api.post("/listing", { location, typeItem, name, date, description, itemType, images })
                 .then(res => {
                     this.props.history.push("/listing");
-                })
-                .catch(err => {
-                    console.log(err)
+                }).catch(err => {
                     this.setState({ error: "Ocorreu um erro ao cadastrar um item." });
                 })
-
         }
     }
 
@@ -51,7 +74,6 @@ class PageLFS extends React.Component {
             <section className="row-found mt-1">
                 <form action="/listing" method="POST" onSubmit={this.handleChange}>
                     {this.state.error && <div className='msg-error text-center'><h5>{this.state.error}</h5></div>}
-
                     <div className="d-flex justify-center align-items-center mt-1">
                         <div className="d-flex justify-center align-items-center">
                             <input name="check" type="radio" id="achado" value="achado" defaultChecked onChange={e => this.setState({ itemType: e.target.value })} />
