@@ -30,4 +30,13 @@ async function store(req, res) {
     res.status(201).send('Usuário criado!');
 }
 
-module.exports = { store };
+async function getUser(req, res) {
+    let user = await User.findOne({
+        where: {
+            id: req.params.id
+        }
+    });
+    res.status(200).send(user);
+}
+
+module.exports = { store, getUser };

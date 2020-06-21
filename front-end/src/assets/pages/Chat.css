@@ -37,3 +37,7 @@
     max-width: 70%;
     color: white;
 }
+
+form#chat {
+    height: 100%;
+}

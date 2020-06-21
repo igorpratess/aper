@@ -28,7 +28,9 @@ class Login extends React.Component {
         })
             .then(res => {
                 this.props.authenticated();
+                this.props.setUser(res.data);
                 localStorage.setItem('token', res.data.token);
+                localStorage.setItem('idUser', res.data.id);
                 this.setLocalStorage();
                 this.props.history.push('/main');
             })
@@ -45,11 +47,9 @@ class Login extends React.Component {
 
     setLocalStorage() {
         const user = document.getElementById('user');
-        const passw = document.getElementById('passw');
 
         if (this.state.checkbox === true) {
             localStorage.setItem('user', user.value);
-            localStorage.setItem('passw', passw.value);
         }
     }
 
@@ -86,5 +86,8 @@ const mapDispatchToProps = dispatch => ({
     authenticated: (s) => dispatch(
         AuthenticationActions.authenticated(s)
     ),
+    setUser: (s) => dispatch(
+        AuthenticationActions.setUser(s)
+    )
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

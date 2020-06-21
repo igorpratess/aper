@@ -4,9 +4,9 @@
  * Module dependencies.
  */
 const express = require('express');
-var app = express();
-var debug = require('debug')('teste-tg1:server');
-var http = require('http');
+const app = express();
+const debug = require('debug')('teste-tg1:server');
+const http = require('http');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
@@ -14,7 +14,7 @@ const cookieParser = require('cookie-parser');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '8000');
+const port = normalizePort(process.env.PORT || '8000');
 app.set('port', port);
 app.use(express.json());
 app.use(cors());
@@ -23,7 +23,8 @@ app.use(cookieParser());
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
+const server = http.createServer(app);
+const io = require('socket.io')(server);
 
 server.setTimeout(360000);
 /**
@@ -48,7 +49,7 @@ function normalizePort(val) {
 
     if (port >= 0) {
         console.log(`App funcionando na porta: ${port}`)
-            // port number
+        // port number
         return port;
     }
 
@@ -97,3 +98,20 @@ function onListening() {
 
 const routes = require('./src/routes.js');
 app.use(routes);
+
+const MessagesController = require('./controllers/MessagesController');
+
+io.on('connection', socket => {
+    // toda vez que um novo cliente se conectar 
+    console.log(`Socket conectado: ${socket.id}`);
+
+    socket.on('sendMessage', data => {
+        let response = MessagesController.saveMessages(data);
+        response.then(res => {
+            socket.emit('receivedMessage', res);
+            socket.broadcast.emit('receivedMessage', res);
+        }).catch(err => {
+            console.log(err)
+        });
+    });
+});

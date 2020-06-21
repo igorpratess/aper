@@ -16,7 +16,7 @@ class ListLost extends React.Component {
     }
 
     async getItems() {
-        const response = await api.get('/listing', {})
+        const response = await api.get('/listing/lost', {})
             .then(res => {
                 this.setState({ list: res.data });
             })

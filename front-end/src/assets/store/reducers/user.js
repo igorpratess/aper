@@ -1,7 +1,7 @@
 const INITIAL_STATE = {
     accessToken: localStorage.getItem('token'),
     isAuthenticated: localStorage.getItem('token') === null ? false : true,
-    user: {}
+    user: localStorage.getItem('idUser')
 }
 
 export default function token(state = INITIAL_STATE, action) {

@@ -10,8 +10,8 @@ module.exports = (sequelize, DataTypes) => {
         senha: DataTypes.STRING
     }, {});
     Usuario.associate = (models) => {
-        Usuario.hasMany(models.Messages, { as: 'fromUser', foreignKey: 'from_user' });
-        Usuario.hasMany(models.Messages, { as: 'toUser', foreignKey: 'to_user' });
+        Usuario.hasMany(models.Messages, { as: 'sentMessages' });
+        Usuario.hasMany(models.Messages, { as: 'receivedMessages' });
         Usuario.hasMany(models.Items, { foreignKey: 'userId' });
     }
 

@@ -7,7 +7,8 @@ module.exports = (sequelize, DataTypes) => {
         date: DataTypes.STRING,
         description: DataTypes.STRING,
         itemType: DataTypes.STRING,
-        images: DataTypes.STRING
+        images: DataTypes.STRING,
+        userId: DataTypes.INTEGER
     }, {});
     Items.associate = (models) => {
         Items.belongsTo(models.Usuarios);

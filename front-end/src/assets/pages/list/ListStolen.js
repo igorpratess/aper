@@ -16,7 +16,7 @@ class ListStolen extends React.Component {
     }
 
     async getItems() {
-        const response = await api.get('/listing', {})
+        const response = await api.get('/listing/stolen', {})
             .then(res => {
                 this.setState({ list: res.data });
             })

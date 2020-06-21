@@ -19,7 +19,7 @@ class Lost extends React.Component {
         date: '',
         description: '',
         images: '',
-        itemType: 'achado',
+        itemType: 'lost',
         error: ""
     };
 

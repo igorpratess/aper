@@ -57,6 +57,7 @@ class Listing extends React.Component {
                             <button className="btn btn-outline-primary font-weight-bold col-4">É meu <div className="icon-like"></div></button>
                         </div>
                     </div>
+                    <input type="hidden" value={list[i].userId}/>
                 </div>
             </li>
             items.push(li);

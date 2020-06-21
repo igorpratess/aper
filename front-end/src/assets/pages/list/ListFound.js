@@ -16,13 +16,18 @@ class ListFound extends React.Component {
     }
 
     async getItems() {
-        const response = await api.get('/listing', {})
+        const response = await api.get('/listing/found', {})
             .then(res => {
                 this.setState({ list: res.data });
             })
             .catch(error => {
                 console.log(error);
             })
+    }
+
+    onBtnClick(e) {
+        let id = e.target.id;
+        localStorage.setItem('userId', id);
     }
 
     teste() {
@@ -52,12 +57,12 @@ class ListFound extends React.Component {
                     <span>Data que foi {list[i].itemType}: {date}</span>
                     {description}
                     <div className="d-flex">
-                        <img src={list[i].images} alt="Imagem do item" width="100" height="100"/>
+                        <img src={list[i].images} alt="Imagem do item" width="100" height="100" />
                     </div>
                     <div className="d-flex">
                         <div className="col-6 d-flex justify-center"></div>
                         <div className="col-6 d-flex justify-center">
-                            <button className="btn btn-outline-primary font-weight-bold col-4">É meu <div className="icon-like"></div></button>
+                            <a href='/chat' id={list[i].userId} className="btn-like btn btn-outline-primary font-weight-bold col-4" onClick={e => this.onBtnClick(e)}>É meu <div className="icon-like"></div></a>
                         </div>
                     </div>
                 </div>

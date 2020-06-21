@@ -104,3 +104,8 @@ button.btn.btn-outline-primary.font-weight-bold.col-4 {
     text-align: center;
     text-transform: capitalize;
 }
+
+.btn-like {
+    display: flex;
+    align-items: center;
+}

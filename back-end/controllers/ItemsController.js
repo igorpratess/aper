@@ -9,7 +9,9 @@ const sequelize = new Sequelize(dbDev.database, dbDev.username, dbDev.password, 
 const Items = require('../models/items')(sequelize, DataTypes);
 
 async function createItemFound(req, res) {
-    let { location, typeItem, name, date, description, itemType, images } = req.body;
+    let { location, typeItem, name, date, description, itemType, userId, images } = req.body;
+    console.log(req.body)
+    console.log(userId)
 
     await Items.create({
         location: location,
@@ -18,14 +20,20 @@ async function createItemFound(req, res) {
         date: date,
         description: description,
         itemType: itemType,
-        images: images
+        images: images,
+        userId: userId
     });
 
     res.status(201).send('Item dos Achados criado!');
 }
 
 async function getItems(req, res) {
-    let items = await Items.findAll();
+    console.log(req.params)
+    let items = await Items.findAll({
+        where: {
+            itemType: req.params.type
+        }
+    });
     res.status(200).send(items);
 }
 

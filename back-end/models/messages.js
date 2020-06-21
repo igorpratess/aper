@@ -6,9 +6,9 @@ module.exports = (sequelize, DataTypes) => {
     from_user: DataTypes.INTEGER,
     to_user: DataTypes.INTEGER
   }, {});
-  Messages.associate = (models) => {
-    Messages.belongsTo(models.Usuarios);
-  }
+  // Messages.associate = (models) => {
+   
+  // }
 
   return Messages;
 };

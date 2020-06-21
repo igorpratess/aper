@@ -1,3 +1,4 @@
+import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import axios from "axios";
 import "./PageLFS.css";
@@ -8,20 +9,20 @@ class Found extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            location: '',
+            typeItem: '',
+            name: '',
+            date: '',
+            description: '',
+            images: '',
+            itemType: 'found',
+            userId: localStorage.getItem('idUser'),
+            error: ""
+        };
         this.teste = this.teste.bind(this);
         this.getFilesFromInputFiles = this.getFilesFromInputFiles.bind(this);
     }
-
-    state = {
-        location: '',
-        typeItem: '',
-        name: '',
-        date: '',
-        description: '',
-        images: '',
-        itemType: 'achado',
-        error: ""
-    };
 
     getFilesFromInputFiles(ev) {
         let arrayLinks = [];
@@ -54,13 +55,13 @@ class Found extends React.Component {
 
     handleChange = async e => {
         e.preventDefault();
-        let { location, typeItem, name, date, description, itemType, images } = this.state;
+        let { location, typeItem, name, date, description, itemType, userId, images } = this.state;
 
         if (!location || !typeItem || !name || !date || !itemType) {
             this.setState({ error: "Campos obrigatórios não preenchidos" });
         } else {
             images = JSON.stringify(images);
-            await api.post("/listing", { location, typeItem, name, date, description, itemType, images })
+            await api.post("/listing", { location, typeItem, name, date, description, itemType, userId, images })
                 .then(res => {
                     this.props.history.push("/listing");
                 }).catch(err => {
@@ -119,4 +120,8 @@ class Found extends React.Component {
     }
 }
 
-export default withRouter(Found);
+const mapStateToProps = state => ({
+    user: state.user
+});
+
+export default connect(mapStateToProps)(Found);

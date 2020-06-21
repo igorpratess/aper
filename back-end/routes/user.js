@@ -5,5 +5,6 @@ const UserController = require('../controllers/UserController');
 
 routes.get('/', withAuth, (req, res) => { return res.status(200).send() });
 routes.post('', UserController.store);
+routes.get('/:id', UserController.getUser);
 
 module.exports = routes;

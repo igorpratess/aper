@@ -1,8 +1,15 @@
-export function authenticated( /*accessToken, refreshToken*/ ) {
+function authenticated() {
     return {
         type: 'AUTHENTICATED',
-        // accessToken: accessToken,
-        // refreshToken: refreshToken,
         isAuthenticated: true
     };
 }
+
+function setUser(user) {
+    return {
+        type: 'TOGGLE_USER',
+        user: user
+    };
+}
+
+module.exports = { authenticated, setUser }
