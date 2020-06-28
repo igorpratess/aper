@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import axios from "axios";
 import "./PageLFS.css";
 import api from '../../services/api';
@@ -8,7 +8,7 @@ class Stolen extends React.Component {
 
     constructor(props) {
         super(props);
-        this.teste = this.teste.bind(this);
+        this.setLink = this.setLink.bind(this);
         this.getFilesFromInputFiles = this.getFilesFromInputFiles.bind(this);
     }
 
@@ -45,10 +45,10 @@ class Stolen extends React.Component {
                 console.log(err);
             })
         });
-        this.teste(arrayLinks);
+        this.setLink(arrayLinks);
     }
 
-    teste(link) {
+    setLink(link) {
         this.setState({ images: link });
     }
 
@@ -56,13 +56,13 @@ class Stolen extends React.Component {
         e.preventDefault();
         let { location, typeItem, name, date, description, itemType, images } = this.state;
 
-        if (!location || !typeItem || !name || !date || !itemType) {
+        if (!location || !typeItem || !name || !date || !itemType || !description || !images) {
             this.setState({ error: "Campos obrigatórios não preenchidos" });
         } else {
             images = JSON.stringify(images);
             await api.post("/listing", { location, typeItem, name, date, description, itemType, images })
                 .then(res => {
-                    this.props.history.push("/listing");
+                    this.props.history.push("/list-stolen");
                 }).catch(err => {
                     this.setState({ error: "Ocorreu um erro ao cadastrar um item." });
                 })
@@ -74,22 +74,22 @@ class Stolen extends React.Component {
             <div className="register-container">
                 <div className="row-register-item">
                     <section className="row-found mt-1">
-                        <form action="/listing" method="POST" onSubmit={this.handleChange}>
+                        <form action="/list-stolen" method="POST" onSubmit={this.handleChange}>
                             <h2 style={{ textAlign: "center" }}>Cadastrar Roubado</h2>
                             {this.state.error && <div className='msg-error text-center'><h5>{this.state.error}</h5></div>}
                             <div className="d-flex justify-content-between align-items-center my-1">
                                 <label htmlFor="location">Local: <span>*</span></label>
-                                <input type="text" id="location" onChange={e => { this.setState({ location: e.target.value }) }} />
+                                <input type="text" id="location" placeholder="Local onde foi roubado" onChange={e => { this.setState({ location: e.target.value }) }} />
                             </div>
 
                             <div className="d-flex justify-content-between align-items-center my-1">
                                 <label htmlFor="location">Tipo: <span>*</span></label>
-                                <input type="text" id="tipo" onChange={e => { this.setState({ typeItem: e.target.value }) }} />
+                                <input type="text" id="tipo" placeholder="Tipo do item, ex: objeto, roupa, eletrônico" onChange={e => { this.setState({ typeItem: e.target.value }) }} />
                             </div>
 
                             <div className="d-flex justify-content-between align-items-center my-1">
                                 <label htmlFor="location">Nome do item: <span>*</span></label>
-                                <input type="text" id="name" onChange={e => { this.setState({ name: e.target.value }) }} />
+                                <input type="text" id="name" placeholder="Nome do item, ex: Moto G7" onChange={e => { this.setState({ name: e.target.value }) }} />
                             </div>
 
                             <div className="d-flex justify-content-between align-items-center my-1">
@@ -98,12 +98,12 @@ class Stolen extends React.Component {
                             </div>
 
                             <div className="d-flex justify-content-between my-1">
-                                <label htmlFor="location">Descrição: </label>
-                                <textarea placeholder="Se quiser contar algo" id="description" cols="20" rows="8" onChange={e => { this.setState({ description: e.target.value }) }}></textarea>
+                                <label htmlFor="location">Descrição: <span>*</span></label>
+                                <textarea placeholder="Descreva como aconteceu, e vamos tentar ajudar da melhor forma" id="description" cols="20" rows="8" onChange={e => { this.setState({ description: e.target.value }) }}></textarea>
                             </div>
 
                             <div className="d-flex justify-content-between align-items-center my-1">
-                                <label htmlFor="img" >Imagem:</label>
+                                <label htmlFor="img" >Imagem: <span>*</span></label>
                                 <input type="file" id="img" multiple onChange={this.getFilesFromInputFiles} />
                             </div>
 

@@ -4,10 +4,11 @@ module.exports = (sequelize, DataTypes) => {
     message: DataTypes.STRING,
     _date: DataTypes.STRING,
     from_user: DataTypes.INTEGER,
-    to_user: DataTypes.INTEGER
+    to_user: DataTypes.INTEGER,
+    idItem: DataTypes.INTEGER
   }, {});
   // Messages.associate = (models) => {
-   
+
   // }
 
   return Messages;

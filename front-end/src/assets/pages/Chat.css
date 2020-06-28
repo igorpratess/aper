@@ -1,12 +1,45 @@
 .chat-container {
     height: 100%;
     padding-top: 20px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
     background-image: url('../images/bg-01.jpg');
     background-size: cover;
     filter: sepia(0.5);
+}
+
+.body {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.chat-container .title {
+    display: flex;
+    align-items: center;
+    max-width: 700px;
+    justify-content: space-evenly;
+}
+
+.backChat {
+    color: black;
+    display: flex;
+    align-items: center;
+    transition: all .5s ease-in-out;
+}
+
+.backChat:hover .arrow {
+    background-image: url('../images/arrow-hover.png');
+    transition: all .5s ease-in-out;
+}
+
+.arrow {
+    background-image: url('../images/arrow.png');
+    background-size: 15px;
+    background-repeat: no-repeat;
+    display: block;
+    width: 15px;
+    height: 17px;
+    margin-right: 3px;
+    transition: all .5s ease-in-out;
 }
 
 .messages {
@@ -17,6 +50,20 @@
     max-width: 70%;
     min-width: 285px;
     overflow: auto;
+}
+
+.messages::-webkit-scrollbar-track {
+    background-color: white;
+}
+
+.messages::-webkit-scrollbar {
+    width: 6px;
+    background: white;
+}
+
+.messages::-webkit-scrollbar-thumb {
+    background: black;
+    border-radius: 4px;
 }
 
 .userName,
@@ -40,4 +87,17 @@
 
 form#chat {
     height: 100%;
+}
+
+.text-capitalize {
+    text-transform: capitalize;
+}
+
+.mt-1 {
+    margin: 3px 0px 3px 0px;
+}
+
+.date {
+    font-size: 10px;
+    font-family: initial;
 }

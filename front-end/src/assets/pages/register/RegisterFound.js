@@ -1,9 +1,8 @@
+import React from 'react';
 import { connect } from 'react-redux';
-import React, { Component } from 'react';
 import axios from "axios";
 import "./PageLFS.css";
 import api from '../../services/api';
-import { withRouter } from 'react-router-dom';
 
 class Found extends React.Component {
 
@@ -20,7 +19,7 @@ class Found extends React.Component {
             userId: localStorage.getItem('idUser'),
             error: ""
         };
-        this.teste = this.teste.bind(this);
+        this.setLink = this.setLink.bind(this);
         this.getFilesFromInputFiles = this.getFilesFromInputFiles.bind(this);
     }
 
@@ -46,10 +45,10 @@ class Found extends React.Component {
                 console.log(err);
             })
         });
-        this.teste(arrayLinks);
+        this.setLink(arrayLinks);
     }
 
-    teste(link) {
+    setLink(link) {
         this.setState({ images: link });
     }
 
@@ -63,7 +62,7 @@ class Found extends React.Component {
             images = JSON.stringify(images);
             await api.post("/listing", { location, typeItem, name, date, description, itemType, userId, images })
                 .then(res => {
-                    this.props.history.push("/listing");
+                    this.props.history.push("/list-found");
                 }).catch(err => {
                     this.setState({ error: "Ocorreu um erro ao cadastrar um item." });
                 })
@@ -75,22 +74,22 @@ class Found extends React.Component {
             <div className="register-container">
                 <div className="row-register-item">
                     <section className="row-found mt-1">
-                        <form action="/listing" method="POST" onSubmit={this.handleChange}>
+                        <form action="/list-found" method="POST" onSubmit={this.handleChange}>
                             <h2 style={{ textAlign: "center" }}>Cadastrar Achado</h2>
                             {this.state.error && <div className='msg-error text-center'><h5>{this.state.error}</h5></div>}
                             <div className="d-flex justify-content-between align-items-center my-1">
                                 <label htmlFor="location">Local: <span>*</span></label>
-                                <input type="text" id="location" onChange={e => { this.setState({ location: e.target.value }) }} />
+                                <input type="text" id="location" placeholder="Local onde foi achado" onChange={e => { this.setState({ location: e.target.value }) }} />
                             </div>
 
                             <div className="d-flex justify-content-between align-items-center my-1">
                                 <label htmlFor="location">Tipo: <span>*</span></label>
-                                <input type="text" id="tipo" onChange={e => { this.setState({ typeItem: e.target.value }) }} />
+                                <input type="text" id="tipo" placeholder="Tipo do item, ex: objeto, roupa, eletrônico" onChange={e => { this.setState({ typeItem: e.target.value }) }} />
                             </div>
 
                             <div className="d-flex justify-content-between align-items-center my-1">
                                 <label htmlFor="location">Nome do item: <span>*</span></label>
-                                <input type="text" id="name" onChange={e => { this.setState({ name: e.target.value }) }} />
+                                <input type="text" id="name" placeholder="Nome do item, ex: Moto G7" onChange={e => { this.setState({ name: e.target.value }) }} />
                             </div>
 
                             <div className="d-flex justify-content-between align-items-center my-1">
@@ -100,7 +99,7 @@ class Found extends React.Component {
 
                             <div className="d-flex justify-content-between my-1">
                                 <label htmlFor="location">Descrição: </label>
-                                <textarea placeholder="Se quiser contar algo" id="description" cols="20" rows="8" onChange={e => { this.setState({ description: e.target.value }) }}></textarea>
+                                <textarea placeholder="Descreva aqui como você achou esse item, ou alguma coisa importante que queira falar para pessoa que perdeu possa identificar" id="description" cols="20" rows="8" onChange={e => { this.setState({ description: e.target.value }) }}></textarea>
                             </div>
 
                             <div className="d-flex justify-content-between align-items-center my-1">

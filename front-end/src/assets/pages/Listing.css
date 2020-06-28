@@ -108,4 +108,5 @@ button.btn.btn-outline-primary.font-weight-bold.col-4 {
 .btn-like {
     display: flex;
     align-items: center;
+    justify-content: center;
 }

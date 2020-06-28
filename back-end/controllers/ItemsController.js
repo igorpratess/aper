@@ -9,9 +9,7 @@ const sequelize = new Sequelize(dbDev.database, dbDev.username, dbDev.password, 
 const Items = require('../models/items')(sequelize, DataTypes);
 
 async function createItemFound(req, res) {
-    let { location, typeItem, name, date, description, itemType, userId, images } = req.body;
-    console.log(req.body)
-    console.log(userId)
+    let { location, typeItem, name, date, description, itemType, userId, ownerUserId, images } = req.body;
 
     await Items.create({
         location: location,
@@ -21,14 +19,14 @@ async function createItemFound(req, res) {
         description: description,
         itemType: itemType,
         images: images,
-        userId: userId
+        userId: userId,
+        ownerUserId: ownerUserId
     });
 
     res.status(201).send('Item dos Achados criado!');
 }
 
 async function getItems(req, res) {
-    console.log(req.params)
     let items = await Items.findAll({
         where: {
             itemType: req.params.type
@@ -37,4 +35,21 @@ async function getItems(req, res) {
     res.status(200).send(items);
 }
 
-module.exports = { createItemFound, getItems };
+async function updateItem(req, res) {
+    console.log(req.params.id)
+    let item = await Items.findOne({
+        where: {
+            id: req.params.id
+        }
+    }).then((item) => {
+        if (item) {
+            item.update({
+                ownerUserId: req.body.ownerUserId
+            }).catch(function () { })
+        }
+    });
+
+    res.status(200).send(item);
+}
+
+module.exports = { createItemFound, getItems, updateItem };

@@ -13,17 +13,18 @@ Messages.belongsTo(Usuario, { foreignKey: 'from_user', as: 'fromUser' });
 Messages.belongsTo(Usuario, { foreignKey: 'to_user', as: 'toUser' });
 
 async function saveMessages(data) {
-
+    
     await Messages.create({
         message: data.message,
         _date: new Date().toLocaleString(),
         from_user: data.from_user,
-        to_user: data.to_user
+        to_user: data.to_user,
+        idItem: data.idItem
     });
 
     let allMsgs = await Messages.findAll({
         where: {
-            from_user: [data.from_user, data.to_user]
+            idItem: data.idItem
         },
         include: [{ model: Usuario, as: 'fromUser' }]
     });
@@ -35,7 +36,7 @@ async function saveMessages(data) {
 async function getAll(req, res) {
     let allMsgs = await Messages.findAll({
         where: {
-            from_user: [req.body.from_user, req.body.to_user]
+            idItem: req.body.idItem
         },
         include: [{ model: Usuario, as: 'fromUser' }]
     });

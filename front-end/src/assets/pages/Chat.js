@@ -1,6 +1,5 @@
-import React, { Component, useState, useEffect } from 'react';
+import React from 'react';
 import "./Chat.css";
-import axios from "axios";
 import api from '../services/api';
 import io from "socket.io-client";
 const socket = io('http://localhost:8000');
@@ -48,13 +47,6 @@ class Chat extends React.Component {
     }
 
     setMessages() {
-        console.log('entrou aqui')
-        socket.on('previousMessage', (messages) => {
-            // for (messages of messages) {
-            //     this.setState({ message: messages })
-            // }
-        });
-
         socket.on('receivedMessage', (message) => {
             this.setState({ messages: message });
         });
@@ -65,13 +57,15 @@ class Chat extends React.Component {
         let obj = {
             message: this.state.currentMsg,
             from_user: this.state.userFrom.id,
-            to_user: this.state.userTo.id
+            to_user: this.state.userTo.id,
+            idItem: localStorage.getItem('idItem')
         }
         socket.emit('sendMessage', obj);
     }
 
     onBlur(e) {
         this.setState({ currentMsg: e.target.value });
+        this.clearInputMsg();
     }
 
     renderMessages() {
@@ -79,8 +73,9 @@ class Chat extends React.Component {
         let array = [];
 
         for (let i = 0; i < messages.length; i++) {
-            let div = <div>
-                <strong>{messages[i].fromUser.nome}: </strong><span>{messages[i].message}</span>
+            let div = <div className='mt-1'>
+                <strong className="text-capitalize">{messages[i].fromUser.nome}: </strong><span>{messages[i].message}</span>
+                <p className="date">{messages[i]._date}</p>
             </div>;
 
             array.push(div);
@@ -91,32 +86,49 @@ class Chat extends React.Component {
 
     async getMessages() {
         let data = {
-            to_user: localStorage.getItem('userId'),
-            from_user: localStorage.getItem('idUser')
-        }
+            idItem: localStorage.getItem('idItem')
+        };
 
         await api.post('/chat', data).
             then(res => {
                 this.setState({ messages: res.data })
             }).catch(err => {
                 console.log(err)
-            })
+            });
+    }
+
+    onEnterPress(e) {
+        if (e.keyCode == 13 || e.which == 13) {
+            this.setState({ currentMsg: e.target.value });
+            this.renderMessages();
+            this.clearInputMsg();
+        }
+    }
+
+    clearInputMsg() {
+        let inputMsg = document.getElementById('inputMsg');
+        inputMsg.value = '';
     }
 
     render() {
         return (
             <form id="chat" onSubmit={e => this.emitMessage(e)}>
-                <div className="chat-container" >
-                    <h1>Chat</h1>
-                    <div className="userName" style={{ marginBottom: '8px' }}>
-                        <span>{this.state.userTo.nome}</span>
+                <div className="chat-container">
+                    <div className="title">
+                        <a href="/main" className="backChat"><i className="arrow"></i>Voltar</a>
+                        <h1>Chat</h1>
                     </div>
-                    <div className="messages">
-                        {this.renderMessages()}
-                    </div>
-                    <input placeholder="Digite sua mensagem" className="typeMsg" style={{ marginTop: '8px', border: 'none', padding: '8px' }} onBlur={e => this.onBlur(e)}></input>
-                    <button className="btn btnSend" type="submit">Enviar</button>
-                </div >
+                    <div className="body">
+                        <div className="userName" style={{ marginBottom: '8px' }}>
+                            <span className="text-capitalize">{this.state.userTo.nome}</span>
+                        </div>
+                        <div className="messages">
+                            {this.renderMessages()}
+                        </div>
+                        <input id="inputMsg" placeholder="Digite sua mensagem" className="typeMsg" style={{ marginTop: '8px', border: 'none', padding: '8px' }} onBlur={e => this.onBlur(e)} onKeyPress={e => this.onEnterPress(e)}></input>
+                        <button className="btn btnSend" type="submit">Enviar</button>
+                    </div >
+                </div>
             </form>
         );
     }
